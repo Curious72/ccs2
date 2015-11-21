@@ -4,6 +4,10 @@ from social.forms import form1
 from django.http import *
 from django.contrib.auth.models import User
 import datetime
+from djangoChat.models import ChatUser
+from django.contrib import auth
+from django.utils.timezone import now as utcnow
+
 # Create your views here.
 
 def  signup(request):
@@ -18,35 +22,44 @@ def tq(request):
     if form.is_valid():
         form=form.cleaned_data
         g=users(name=form['name'],password=form['password'], year=form['year'],email=form['email'],usertype=form['usertype'],branch=form['branch'])
-        ty= User(username=form['name'],password=form['password'])
+        ty= User.objects.create_user(form['name'],'knowthyself2503@gmail.com',form['password'])
         g.save()
-        ty.save()
+        uy=ChatUser(username=form['name'],is_chat_user=True)
+        uy.save()
+        username = form['name'] #retunr '' if no username
+        password = form['password']
+        assert False
         
         return HttpResponseRedirect("/login")
 
 def login(request):
     if "username" in request.session:
         return render(request,"redirect.html",{'name':request.session['username']})
+    
     else:
         return render(request,"login.html")
     
-def auth(request):
+def autho(request):
     try:
         
       j=users.objects.get(name=request.POST['name'],password=request.POST['password'])
       k=users.objects.filter(name=request.POST['name'],password=request.POST['password'])
       for i in k:
           request.session['usertype']=i.usertype
-        
       
-      #print type(j)
-      #po=list(j)
-    
+      name=request.POST['name']
+      password=request.POST['password']
+      user=auth.authenticate(username=name,password=password)
+      auth.login(request,user)
+      cu = request.user.profile
+      cu.is_chat_user = True
+      cu.last_accessed = utcnow()
+      cu.save()
+      request.session['username']=name
+      request.session['password']=password
       
-      request.session['username']=request.POST['name']
-      request.session['password']=request.POST['password']
       return HttpResponseRedirect("/home1")
-    except usersi.DoesNotExist:
+    except users.DoesNotExist:
        return render(request,"login.html",{'errors':True})
     
 def home(request,value):
