@@ -26,7 +26,8 @@ SECRET_KEY = '%vr7pbwpyi(kgo(aj24)nw04c0vm)74@%-4nlw%6tmg3(=b*6v'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+APP_DIR = os.path.join(BASE_DIR, 'social')
+TEMPLATE_DIR = os.path.join(BASE_DIR,'college')
 
 # Application definition
 
@@ -37,7 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'social'
+    'social',
+    'djangoChat'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -56,8 +58,7 @@ ROOT_URLCONF = 'college.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/home/shivangi/shivangi/sh/college/templates'],
-        'APP_DIRS': True,
+ 'DIRS': [os.path.join(APP_DIR, 'templates'), os.path.join(TEMPLATE_DIR, 'templates'), ],        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -101,3 +102,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+STATICFILES_DIRS = (
+    os.path.join(TEMPLATE_DIR, "static"),
+)

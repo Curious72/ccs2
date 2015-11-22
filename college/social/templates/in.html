@@ -1,0 +1,180 @@
+﻿
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>University a Educational Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+<link href="/static/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- jQuery (necessary JavaScript plugins) -->
+<script src="/static/js/bootstrap.js"></script>
+<!-- Custom Theme files -->
+<link href="/static/css/style.css" rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="University Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<script src="/static/js/jquery.min.js"></script>
+ <script src="/static/js/bootstrap.js"></script>
+<style type="text/css">
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+        </style>
+</head>
+<body>
+<!-- banner -->
+<script src="/static/js/responsiveslides.min.js"></script>
+<script>  
+    $(function () {
+      $("#slider").responsiveSlides({
+      	auto: true,
+      	nav: true,
+      	speed: 500,
+        namespace: "callbacks",
+        pager: true,
+      });
+    });
+  </script>  
+<div class="banner">	  
+	 <div class="header">
+			 <div class="logo">
+				 <a href="/index"><img src="/static/images/logo.jpg" alt=""/></a>
+			 </div>
+			 <div class="top-menu">
+				 <span class="menu"></span>
+				 <ul class="navig">
+				 
+<li class="active" ><a href="/home1">Home</a>
+</li>
+					 <li><a href="/chat">Chat</a></li>
+					 <li><a href="/logout">Logout</a></li>
+					 
+				 </ul>
+			 </div>
+			  <!-- script-for-menu -->
+		 <script>
+				$("span.menu").click(function(){
+					$("ul.navig").slideToggle("slow" , function(){
+					});
+				});
+		 </script>
+		 <!-- script-for-menu -->
+
+			 <div class="clearfix"></div>
+	 </div>
+	 <div class="slider">
+		 <div class="caption">
+			 <div class="container">
+				  <div class="callbacks_container">
+					  <ul class="rslides" id="slider">
+						    <li><a href="/home1"><h3 style="font-family:cursive ;font-size:50px">ANNOUNCEMENTS</h3></a></li>
+							<li><a href="/home2"><h3>COMPLAINTS</h3></a></li>	
+							<li><a href="/home3"><h3>ASSIGNMENTS</h3></a></li>	
+                                                    <li><a href="/home4"><h3>CURRICULUM</h3></a></li>
+					  </ul>	
+						<div class="clearfix"></div>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+	 
+	 <br>
+	 <br>
+	 <br>
+	 <br>
+	 <br>
+	 <br>
+	 <br>
+	 <br>
+	 <br>
+	 <br>
+	        {%if bool %}
+        <table class="gridtable">
+            <col width="60">
+            <col width="1500">
+            <col width="60">   
+            <br>
+            <br>
+            <br>
+            <tr>
+                <th>Name</th>
+                <th>{%if value == "1" %}
+                Announcements
+                {%endif%}
+                {%if value == "2" %}
+                Complaints
+                {%endif%}
+                {%if value == "3" %}
+                Assignments
+                {%endif%}
+                {%if value == "4" %}
+                Curriculum
+                {%endif%}</th>
+                <th>Time</th>
+            </tr>
+            {%for item in data %}
+            <tr>
+                <td align="center">{{item.name}}</td>
+                <td align="left">{{item.text}}</td>
+                <td align="center">{{item.time}}</td>
+            </tr>
+            {%endfor%}
+        </table>  
+    
+    {%if value == "1" or value == "4" %}
+    <form action="/home{{value}}/" method="POST">
+        <textarea  rows="10" cols="200" name="text" placeholder="Wanna add something ? Go on!" style="vertical-align:middle "></textarea>
+        <button type="submit" style="size:100px" >Add</Button>
+         {%csrf_token%}
+    </form>
+    {%endif%}
+    
+    {%if value == "2" and type != "administration" %}
+    <form action="/home2/" method="POST">
+        <textarea rows="10" cols="100" name="text" placeholder="Wanna add something ? Go on!" style="vertical-align:middle "></textarea>
+        <input type="submit" value="Add">
+         {%csrf_token%}
+    </form>
+    {%endif%}
+    {%if value == "3" and type == "faculty" %}
+    <form action="/home4/" method="POST">
+  <textarea rows="10" cols="100" name="text" placeholder="Wanna add something ? Go on!" style="vertical-align:middle "></textarea>
+        <input type="submit" value="Add">
+         {%csrf_token%}
+    </form>
+       {%endif %}
+ {%endif%}
+	 
+	 
+	 
+	 
+	  
+</body>
+</html>

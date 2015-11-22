@@ -15,12 +15,22 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+
 from social import views
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^signup/',views.signup),
     url(r'^thanks/',views.tq),
-    url(r'^authenticate/',views.auth),
-        url(r'^login/',views.login),
+    url(r'^authenticate/',views.autho),
+    url(r'^login/',views.login),
+    url(r'^home(\d)/',views.home),
+    url(r'^index/',views.index),
+    url(r'^logout/',views.logout),
+    #url(r'^initial',views.initial),
+    url(r'^chat/',include('djangoChat.urls')),
+    url(r'^welcome',views.welcome),
+    url(r'^in',views.intr),
+#url(r'^ccs2.0/',views.welcome),
+]
 
-    ]
