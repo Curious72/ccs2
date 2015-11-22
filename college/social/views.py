@@ -12,7 +12,7 @@ from django.utils.timezone import now as utcnow
 
 def  signup(request):
     if "username" in request.session:
-       return render(request,"redirect.html",{'name':request.session['username']})
+       return render(request,"Logout.html",{'name':request.session['username']})
     else:
         cform=form1()
         return render(request,"form.html",{'form':cform})
@@ -31,7 +31,7 @@ def tq(request):
 
 def login(request):
     if "username" in request.session:
-        return render(request,"redirect.html",{'name':request.session['username']})
+        return render(request,"Logout.html",{'name':request.session['username']})
     
     else:
         return render(request,"login.html")
@@ -44,7 +44,7 @@ def autho(request):
       for i in k:
           request.session['usertype']=i.usertype
           
-      print request.session['usertype']
+      t= request.session['usertype']
       name=request.POST['name']
       password=request.POST['password']
       user=auth.authenticate(username=name,password=password)
@@ -55,8 +55,8 @@ def autho(request):
       cu.save()
       request.session['username']=name
       request.session['password']=password
-      
-      return HttpResponseRedirect("/home1")
+      request.session['usertype']=t
+      return HttpResponseRedirect("/index")
     except users.DoesNotExist:
        return render(request,"login.html",{'errors':True})
     
@@ -86,12 +86,12 @@ def home(request,value):
 
 def logout(request):
     del request.session['username']
-    del request.session['usertype']
+    #del request.session['usertype']
     return HttpResponseRedirect("/welcome")
 
 
 def welcome(request):
-    return render(request,"welcome.html")
+    return render(request,"guest.html")
 def index(request):
     return render(request,"index.html")
 def intr(request):

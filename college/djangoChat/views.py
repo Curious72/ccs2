@@ -13,7 +13,6 @@ from django.utils.timezone import now as utcnow
 from django.utils.safestring import mark_safe
 
 
-
 def index(request):
 
 	if request.user.username and request.user.profile.is_chat_user:
