@@ -117,13 +117,38 @@ table.gridtable td {
 	 <br>
 	        {%if bool %}
         <table class="gridtable">
-            <col width="60">
+            <col width="80">
             <col width="1500">
-            <col width="60">   
+            <col width="80">   
             <br>
             <br>
             <br>
-            <tr>
+			
+			 
+    {%if value == "1" or value == "4" %}
+    <form action="/home{{value}}/" method="POST">
+        <textarea  rows="10" cols="200" name="text" placeholder="Wanna add something ? Go on!" style="vertical-align:middle "></textarea>
+        <button type="submit" style="size:100px" >Add</Button>
+         {%csrf_token%}
+    </form>
+    {%endif%}
+    
+    {%if value == "2" and type != "administration" %}
+    <form action="/home2/" method="POST">
+        <textarea rows="10" cols="200" name="text" placeholder="Wanna add something ? Go on!" style="vertical-align:middle "></textarea>
+        <input type="submit" value="Add">
+         {%csrf_token%}
+    </form>
+    {%endif%}
+    {%if value == "3" and type == "faculty" %}
+    <form action="/home4/" method="POST">
+  <textarea rows="10" cols="200" name="text" placeholder="Wanna add something ? Go on!" style="vertical-align:middle "></textarea>
+        <input type="submit" value="Add">
+         {%csrf_token%}
+    </form>
+       {%endif %}
+			
+            <tr style="font-size:30px">
                 <th>Name</th>
                 <th>{%if value == "1" %}
                 Announcements
@@ -140,36 +165,14 @@ table.gridtable td {
                 <th>Time</th>
             </tr>
             {%for item in data %}
-            <tr>
+            <tr style="font-size:25px">
                 <td align="center">{{item.name}}</td>
                 <td align="left">{{item.text}}</td>
                 <td align="center">{{item.time}}</td>
             </tr>
             {%endfor%}
         </table>  
-    
-    {%if value == "1" or value == "4" %}
-    <form action="/home{{value}}/" method="POST">
-        <textarea  rows="10" cols="200" name="text" placeholder="Wanna add something ? Go on!" style="vertical-align:middle "></textarea>
-        <button type="submit" style="size:100px" >Add</Button>
-         {%csrf_token%}
-    </form>
-    {%endif%}
-    
-    {%if value == "2" and type != "administration" %}
-    <form action="/home2/" method="POST">
-        <textarea rows="10" cols="100" name="text" placeholder="Wanna add something ? Go on!" style="vertical-align:middle "></textarea>
-        <input type="submit" value="Add">
-         {%csrf_token%}
-    </form>
-    {%endif%}
-    {%if value == "3" and type == "faculty" %}
-    <form action="/home4/" method="POST">
-  <textarea rows="10" cols="100" name="text" placeholder="Wanna add something ? Go on!" style="vertical-align:middle "></textarea>
-        <input type="submit" value="Add">
-         {%csrf_token%}
-    </form>
-       {%endif %}
+   
  {%endif%}
 	 
 	 
